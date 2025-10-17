@@ -161,16 +161,6 @@ For detailed documentation, see [DOCUMENTATION.md](./DOCUMENTATION.md)
 - Click on "New codespace" to launch a new Codespace environment
 - Edit files directly within the Codespace and commit your changes
 
-## 📞 Support
 
-- 🐛 [Report Issues](https://github.com/AravinZz69/AetherAii/issues)
-- 💬 [Discussions](https://github.com/AravinZz69/AetherAii/discussions)
-- 📧 Email: support@aetherai.com
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
 
 *Built with ❤️ for the future of traffic intelligence*
