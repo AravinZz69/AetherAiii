@@ -396,26 +396,6 @@ docs(readme): update installation instructions
 
 ---
 
-## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-
----
-
-## 📞 Support
-
-For support and questions:
-- GitHub Issues: [AetherAii Issues](https://github.com/AravinZz69/AetherAii/issues)
-- Email: support@aetherai.com
-
----
-
-## 🔄 Version History
-
-- **v1.0.0** - Initial release with core traffic analysis features
-- **v0.9.0** - Beta release with UI/UX improvements
-- **v0.8.0** - Alpha release with basic functionality
-
----
 
 *Built with ❤️ by the AetherAi Team*
