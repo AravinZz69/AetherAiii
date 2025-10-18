@@ -1,6 +1,22 @@
 import { Cloud, Droplets, Wind, Sun, Thermometer } from "lucide-react";
+import { useLocation } from "@/contexts/LocationContext";
 
 const WeatherWidget = () => {
+  const { weather, location } = useLocation();
+
+  if (!weather) {
+    return (
+      <div className="glass-card rounded-xl p-6 relative overflow-hidden">
+        <div className="flex items-center justify-center h-[300px]">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-2"></div>
+            <p className="text-muted-foreground">Loading weather data...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="glass-card rounded-xl p-6 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-accent/20 to-primary/20 rounded-full blur-3xl" />
@@ -12,7 +28,9 @@ const WeatherWidget = () => {
           </div>
           <div>
             <h2 className="text-xl font-bold">Weather</h2>
-            <p className="text-sm text-muted-foreground">Current conditions</p>
+            <p className="text-sm text-muted-foreground">
+              {location.city ? `${location.city} conditions` : 'Current conditions'}
+            </p>
           </div>
         </div>
 
@@ -20,9 +38,9 @@ const WeatherWidget = () => {
           <div>
             <div className="flex items-center gap-2">
               <Thermometer className="w-8 h-8 text-primary" />
-              <span className="text-5xl font-bold text-glow">24°</span>
+              <span className="text-5xl font-bold text-glow">{weather.temperature}°</span>
             </div>
-            <p className="text-muted-foreground mt-2">Partly Cloudy</p>
+            <p className="text-muted-foreground mt-2">{weather.condition}</p>
           </div>
           <Sun className="w-16 h-16 text-warning opacity-80" />
         </div>
@@ -33,7 +51,7 @@ const WeatherWidget = () => {
               <Droplets className="w-4 h-4 text-accent" />
               <span className="text-xs text-muted-foreground">Humidity</span>
             </div>
-            <p className="text-lg font-bold">65%</p>
+            <p className="text-lg font-bold">{weather.humidity}%</p>
           </div>
           
           <div className="bg-muted/30 rounded-lg p-3 border border-border/50">
@@ -41,7 +59,7 @@ const WeatherWidget = () => {
               <Wind className="w-4 h-4 text-primary" />
               <span className="text-xs text-muted-foreground">Wind</span>
             </div>
-            <p className="text-lg font-bold">12 km/h</p>
+            <p className="text-lg font-bold">{weather.windSpeed} km/h</p>
           </div>
           
           <div className="bg-muted/30 rounded-lg p-3 border border-border/50">
@@ -49,23 +67,17 @@ const WeatherWidget = () => {
               <Cloud className="w-4 h-4 text-secondary" />
               <span className="text-xs text-muted-foreground">Pressure</span>
             </div>
-            <p className="text-lg font-bold">1013 hPa</p>
+            <p className="text-lg font-bold">{weather.pressure} hPa</p>
           </div>
         </div>
 
         <div className="mt-4 flex items-center justify-between text-sm">
-          <div className="text-center">
-            <p className="text-muted-foreground">Tomorrow</p>
-            <p className="font-bold mt-1">26° / 18°</p>
-          </div>
-          <div className="text-center">
-            <p className="text-muted-foreground">Tue</p>
-            <p className="font-bold mt-1">25° / 17°</p>
-          </div>
-          <div className="text-center">
-            <p className="text-muted-foreground">Wed</p>
-            <p className="font-bold mt-1">23° / 16°</p>
-          </div>
+          {weather.forecast.map((day, index) => (
+            <div key={index} className="text-center">
+              <p className="text-muted-foreground">{day.day}</p>
+              <p className="font-bold mt-1">{day.high}° / {day.low}°</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>

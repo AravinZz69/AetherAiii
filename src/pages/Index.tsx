@@ -11,11 +11,13 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { UserAvatar } from "@/components/UserAvatar";
 import { PreLoader } from "@/components/PreLoader";
 import { useAdminAccess } from "@/hooks/useAdminAccess";
+import { LocationProvider, useLocation } from "@/contexts/LocationContext";
 
-const Index = () => {
+const DashboardContent = () => {
   const navigate = useNavigate();
   const [showPreLoader, setShowPreLoader] = useState(true);
   const { isAdmin } = useAdminAccess();
+  const { metrics } = useLocation();
 
   if (showPreLoader) {
     return <PreLoader onComplete={() => setShowPreLoader(false)} />;
@@ -88,7 +90,7 @@ const Index = () => {
 
         {/* Metrics Grid */}
         <div className="mb-6 animate-fade-in">
-          <MetricsGrid />
+          <MetricsGrid metrics={metrics || undefined} />
         </div>
 
         {/* Main Grid */}
@@ -128,6 +130,14 @@ const Index = () => {
         </footer>
       </div>
     </div>
+  );
+};
+
+const Index = () => {
+  return (
+    <LocationProvider>
+      <DashboardContent />
+    </LocationProvider>
   );
 };
 
